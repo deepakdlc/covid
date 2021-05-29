@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/assets/style.css">
+    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+<div class="upper">
+    <h1 > Covid-19 Monitor </h1> -by Varsha Raghav
+</div>
+
+    <div class="bar1">
+      <iframe src="https://ourworldindata.org/explorers/coronavirus-data-explorer?zoomToSelection=true&time=2020-03-01..latest&pickerSort=desc&pickerMetric=new_deaths_per_million&Metric=Confirmed+deaths&Interval=7-day+rolling+average&Relative+to+Population=true&Align+outbreaks=false&country=IND~USA&hideControls=true"  style="width: 100%; height: 600px; border: 0px none;"></iframe>
+<br><br><br><br>
+      <iframe src="https://ourworldindata.org/explorers/coronavirus-data-explorer?zoomToSelection=true&pickerSort=asc&pickerMetric=population&hideControls=true&Metric=Confirmed+cases&Interval=Cumulative&Relative+to+Population=false&Align+outbreaks=false&country=IND~OWID_WRL"  style="width: 100%; height: 600px; border: 0px none;"></iframe>   
+    </div>
+    
+
+
+     <div class="data">
+     <div class="card">
+        <div class="container">
+
+          <h1 id="mypanel">
+          </h1>
+        </div>
+      </div></div>
+      
+    
+     
+
+
+
+
+
+    <script>
+
+                    fetch('https://api.covid19india.org/data.json')
+                    .then(response => response.json())
+                    .then(characters => showCharacters(characters.statewise));
+
+                    showCharacters = characters => {
+                    const charactersDiv = document.querySelector('#mypanel');
+                    characters.forEach(character => {
+                    const characterElement = document.createElement('p');
+                    characterElement.innerText = `State name: ${character.state}`+`\n Active: ${character.active}`+`\n Confirmed: ${character.confirmed}`
+                    + `\n Deaths: ${character.deaths}`+`\n Last Updated Time: ${character.lastupdatedtime}`+`\n Recovered: ${character.recovered}` ;
+                    charactersDiv.append(characterElement);
+                    
+
+
+
+                    }
+                    );
+                    }
+    </script>
+
+    
+</body>
+</html>
